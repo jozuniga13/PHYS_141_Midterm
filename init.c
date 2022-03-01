@@ -9,4 +9,7 @@
 #define MAXPNT 3000            /* maximum number of points */
 #define PI 3.141592654
 
+double M,m,Rmin,Rinit;
+
+
 

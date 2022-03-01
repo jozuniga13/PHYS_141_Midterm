@@ -5,8 +5,11 @@ First meeting: Mon Feb 28.
 "init.c" -> set up the initial conditions of the disk particles and center of the two galaxies
 1. A function 'populate(n,Rmin,r1,r2,x,y,z)' to populate two disks. r1 is the center of mass coordinate of the galaxy A and r2 galaxy B. The goal is to create 11 concentric (circular) rings of 297 particles of mass m in each disk. Each ring has radius 0.2(0.05)0.7Rmin (that means each ring increases radius by 0.05 Rmin. The innermost ring should have 0.2Rmin as radius, the outermost 0.7Rmin). Rmin=25kpc. The center of each disk is a sun-like object with mass M. Remember that at all times,
 r1+r2=0.
+What we don't know is: M, m, Rinit.
 2. A function "printpos(x,y,z)" to print the x,y,z arrays of the 297*2 particles to a "posi.dat" file.
 3. The separation of the two disks (or the two suns) is Rinit. The constraints on the initial separation at t=tinit (not zero) are that: first, at t=0,
 
 Question: Do we determine m,M,Rinit by our own choice? Presumably from looking up the parameters of the Mice galaxies on the Internet? I didn't find those conditions in Toomre&Toomre.
 
+'evolve.c'
+1. The relative coordinate vector (centre of mass A-centre of mass B) traces out an elliptical orbit.
