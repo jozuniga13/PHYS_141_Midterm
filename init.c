@@ -13,6 +13,7 @@ double M,Rinit;
 double G=1.0; 
 double Rmin=25; /* in kiloparsec */
 
+void angular();
 void position();
 
 int main(argc, argv)
@@ -24,9 +25,16 @@ char *argv[];
     M=M*4.30091*pow(10,-6);
     
     /* set up position vectors */
-    int particleN=297;  
+    int particleN=297*2;  
+    int ringN=11;
+    double r[ringN],theta[ringN];
+    double x1,x2; /* find out the initial positions of the core masses */
+
+
+    angular(r,theta)
     double x[particleN],y[particleN],z[particleN];
-    position(x,y,z,particleN);
+    position(x,y,z,particleN,x1,x2);
+    
     
     
 
@@ -35,31 +43,63 @@ char *argv[];
     return 0;
 }
 
-void position(x,y,z,n)
+void angular(r,theta)
+double r[];
+double theta[];
+{
+    int ringn=11;
+    int innern=12;
+    int outern=42;
+    for (int i=0;i<ringn;i++)
+    {
+        double radius=(0.2+0.05*i)*Rmin;
+        double theta=2*PI/(innern+3*i);
+        r[i]=radius;
+        theta[i]=theta;
+    }
+}
+
+
+
+
+void position(x,y,z,n,x1,x2)
 double x[];
 double y[];
 double z[];
 int n;
+double x1; /* position of the first core mass */
+double x2;
 {
     int ringn=11;
     int innern=12;
     int outern=42;
     
     int count=0;
-    
-    /* compute the radius and theta of the points in each ring w.r.t. the center of the galaxy (the core mass) */
+   
+    /* first galaxy */
     for (int i=0;i<ringn;i++)
     {
-        double radius=(0.2+0.05*i)*Rmin;
-        double theta=2*PI/(innern+3*i);
         for (int j=0;j<12+3*i;j++)
         {
-            x[count]=radius*cos(j*theta);
+            x[count]=radius*cos(j*theta)+x1;
             y[count]=radius*sin(j*theta);
             z[count]=0;
             count++;
         }
     }
+
+    /* second galaxy */
+    for (int i=0;i<ringn;i++)
+    {
+        for (int j=0;j<12+3*i;j++)
+        {
+            x[count]=radius*cos(j*theta)+x2;
+            y[count]=radius*sin(j*theta);
+            z[count]=0;
+            count++;
+        }
+    }
+
     
     /* check if the number of particles in each disk is equal to 297 */
     if (count!=n)
