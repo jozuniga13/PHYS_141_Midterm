@@ -15,3 +15,5 @@ M=10^11 solar mass. m does not matter since we are using leapfrog to compute the
 'evolve.c'
 The disk particles do not interact with each other. The centre of mass of each galaxy is just the core (at all times). The disk particles are given an initial velocities so that the circular shapes are maintained (should be simple math)
 1. The relative coordinate vector (centre of mass A-centre of mass B) traces out an elliptical orbit.
+
+https://evgenii.com/blog/three-body-problem-simulator/
