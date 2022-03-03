@@ -13,7 +13,7 @@ double M,Rinit;
 double G=1.0; 
 double Rmin=25; /* in kiloparsec */
 
-void angular(); /* find (r, theta) for every point */
+void position();
 
 int main(argc, argv)
 int argc;
@@ -24,7 +24,9 @@ char *argv[];
     M=M*4.30091*pow(10,-6);
     
     /* set up position vectors */
-
+    int particleN=297;  
+    double x[particleN],y[particleN],z[particleN];
+    position(x,y,z,particleN);
     
     
 
@@ -33,11 +35,12 @@ char *argv[];
     return 0;
 }
 
-void angular(r, theta)
-double r[];
-double theta[];
+void position(x,y,z,n)
+double x[];
+double y[];
+double z[];
+int n;
 {
-    int particlen=297;
     int ringn=11;
     int innern=12;
     int outern=42;
@@ -49,14 +52,21 @@ double theta[];
     {
         double radius=(0.2+0.05*i)*Rmin;
         double theta=2*PI/(innern+3*i);
-        count=count+12+3*i;
+        for (int j=0;j<12+3*i;j++)
+        {
+            x[count]=radius*cos(j*theta);
+            y[count]=radius*sin(j*theta);
+            z[count]=0;
+            count++;
+        }
     }
     
     /* check if the number of particles in each disk is equal to 297 */
-    if (count!=297)
+    if (count!=n)
     {
         printf("There is something wrong with how I compute (r,theta).\n");
     }
+    
 }
 
 
