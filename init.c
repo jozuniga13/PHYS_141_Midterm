@@ -26,13 +26,12 @@ char *argv[];
     
     /* set up position vectors */
     int particleN=297*2;  
-    int ringN=11;
-    double r[ringN],theta[ringN];
+    double r[MAXPNT],theta[MAXPNT];
     double x1,x2; /* find out the initial positions of the core masses */
 
 
     angular(r,theta)
-    double x[particleN],y[particleN],z[particleN];
+    double x[MAXPNT],y[MAXPNT],z[MAXPNT];
     position(x,y,z,particleN,x1,x2);
     
     
@@ -81,8 +80,8 @@ double x2;
     {
         for (int j=0;j<12+3*i;j++)
         {
-            x[count]=radius*cos(j*theta)+x1;
-            y[count]=radius*sin(j*theta);
+            x[count]=r[i]*cos(j*theta[i])+x1;
+            y[count]=r[i]*sin(j*theta[i]);
             z[count]=0;
             count++;
         }

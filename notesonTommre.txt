@@ -1,0 +1,1 @@
+"these [disk] particles in the first three examples were set to orbit one mass point with uniform angular spacing "
